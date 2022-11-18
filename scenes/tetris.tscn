@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/volcano background.png" type="Texture" id=1]
+[ext_resource path="res://assets/game-background.png" type="Texture" id=2]
+[ext_resource path="res://scenes/tetris.gd" type="Script" id=3]
+[ext_resource path="res://scenes/NextShape.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/PointsPanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 360, 48 )
+
+[sub_resource type="Gradient" id=2]
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 64, 720 )
+
+[node name="Tetris" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ShapesArea" type="Sprite" parent="."]
+position = Vector2( 960, 0 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="NextShapePanel" parent="." instance=ExtResource( 4 )]
+
+[node name="PointsPanel" parent="." instance=ExtResource( 5 )]
+position = Vector2( 42, 284 )
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1280, 1392 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ground"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Walls/Ground"]
+texture = SubResource( 3 )
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+position = Vector2( 896, 720 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource( 4 )
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1664, 720 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1280, 1344 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
