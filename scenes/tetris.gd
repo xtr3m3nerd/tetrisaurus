@@ -2,6 +2,9 @@ extends Node2D
 
 onready var shape1 = preload("res://shapes/Shape1.tscn")
 onready var shape2 = preload("res://shapes/Shape2.tscn")
+onready var shape3 = preload("res://shapes/Shape3.tscn")
+onready var shape4 = preload("res://shapes/Shape4.tscn")
+onready var shape5 = preload("res://shapes/Shape5.tscn")
 var shapes = []
 var shape
 var active_block=false
@@ -10,7 +13,7 @@ var num: int = -1
 var next_num: int = 0
 
 func _ready():
-	shapes = [ shape1, shape2 ]
+	shapes = [ shape1, shape2, shape3, shape4, shape5 ]
 	rnd.randomize()
 
 func _on_Timer_timeout():

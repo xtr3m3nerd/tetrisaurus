@@ -77,15 +77,17 @@ func play_anim(anim_name, repeat = false, backwards = false):
 	if !repeat and cur_anim == anim_name:
 		return
 	if backwards:
-		anim_player.play_backwards(anim_name)
-	else: 
-		anim_player.play(anim_name)
+		pass
+		#anim_player.play_backwards(anim_name)
+	else:
+		pass
+		#anim_player.play(anim_name)
 	cur_anim = anim_name
 
 func kill():
 	dead = true
 	freeze()
-	anim_player.play("die")
+	#anim_player.play("die")
 
 func freeze():
 	character_mover.freeze(true)
