@@ -42,8 +42,8 @@ func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
 		character_mover.jump()
 	
-	var mouse_pos = get_global_mouse_position() 
-	var screen_space = global_transform.origin
+#	var mouse_pos = get_global_mouse_position() 
+#	var screen_space = global_transform.origin
 #	if facing_right != (mouse_pos.x > screen_space.x):
 #		facing_right = mouse_pos.x > screen_space.x
 #		change_direction()

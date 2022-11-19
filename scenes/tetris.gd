@@ -57,7 +57,7 @@ func move_down():
 
 func _input(_event):
 	if shape:
-		if Input.is_action_just_pressed("ui_down"):
+		if Input.is_action_pressed("ui_down"):
 			move_down()
 		if not can_control:
 			return
