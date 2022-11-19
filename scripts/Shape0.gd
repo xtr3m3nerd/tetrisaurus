@@ -27,6 +27,7 @@ func draw_shape():
 	var ind=0
 	for child in get_children():
 		child.position=rotation_matrix[rotate_position][ind]
+		print("Create child ", ind, " at ", child.position)
 		ind+=1
 
 func rotate_it():
@@ -48,12 +49,16 @@ func rotate_shape():
 		rotate_position=rotate_position+1 if rotate_position<3 else 0
 
 func inactivate_it():
-	if position == create_position:
-		var err = get_tree().reload_current_scene()
-		if err:
-			print("Failed to restart scene: ", err)
+#	if position == create_position:
+#		var err = get_tree().reload_current_scene()
+#		if err:
+#			print("Failed to restart scene: ", err)
 	for child in get_children():
 		child.inactivate_it()
+
+func disable_inactivate():
+	for child in get_children():
+		child.is_display=true
 
 func move_left():
 	if not is_fixed:
@@ -75,12 +80,21 @@ func move_down():
 	if not create_position: 
 		create_position = position
 	if not is_fixed:
+		var c = 0
 		for child in get_children():
 			if not child.can_move_down():
 				print("create position: %s e position: %s"%[create_position, position])
 				if create_position==position:
+					print(c)
+					print_children_pos()
 					Globals.restart_game()
 				is_fixed=true
 				return
+			c += 1
 		position.y += Globals.BLOCK_SIZE
-		print(position)
+
+func print_children_pos():
+	var c = 0
+	for child in get_children():
+		print ("Child ", c , " : ", child.position+position)
+		c += 1

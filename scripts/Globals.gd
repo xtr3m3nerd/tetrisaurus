@@ -6,8 +6,8 @@ signal add_points
 var inactive=[]
 var inactive_blocks=[]
 var points = 0
-var start_speed = 0.1
-var speed = 0.1
+var start_speed = 0.5
+var speed = 0.5
 const BLOCK_SIZE = 64
 const MAP_WIDTH = BLOCK_SIZE * 10
 const MAP_HEIGHT = BLOCK_SIZE * 20
@@ -15,13 +15,14 @@ const MAP_HEIGHT = BLOCK_SIZE * 20
 func inactivate_shape():
 	emit_signal("inact_shape")
 
-func add_points():
-	points += 100
+func add_points(amnt):
+	points += amnt
 	if points%100==0 and speed>0.1:
-		speed -= 0.1
+		speed -= 0.05
 	emit_signal("add_points")
 
 func restart_game():
+	print("restart_game")
 	speed=start_speed
 	points=0
 	inactive.clear()

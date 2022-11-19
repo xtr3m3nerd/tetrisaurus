@@ -1,18 +1,27 @@
 extends Node2D
 
+onready var sprite: AnimatedSprite = $Sprite
 var is_active=false
+var is_display=false
 
 func _ready():
 	is_active=true
 	var err = Globals.connect("inact_shape", self, "inactivate_it")
 	if err:
 		print("Failed to connect to inact_shape: ", err)
+	sprite.frame = randi() % sprite.frames.get_frame_count("default")
+	sprite.rotation_degrees = randi() % 4 * 90
+	
 
 func inactivate_it():
+	if is_display:
+		return
 	if is_active:
+		Globals.add_points(10)
 		get_parent().is_fixed=true
 		is_active=false
 		get_tree().root.get_node("Tetris").active_block=false
+		print("Inactivate: ", get_parent().position+position)
 		Globals.inactive.append(get_parent().position+position)
 		Globals.inactive_blocks.append(self)
 		Globals.inactivate_shape()
@@ -35,6 +44,11 @@ func can_move_down() -> bool:
 	var parent_pos = get_parent().position
 	var down_pos = parent_pos + position + Vector2(0,Globals.BLOCK_SIZE)
 	#if parent_pos.x + position.x == 0 or Globals.inactive.has(down_pos) or parent_pos.y + position.y == Globals.MAP_HEIGHT:
+	if Globals.inactive.has(down_pos):
+		print("down_pos: ", down_pos)
+		print("Globals.inactive: ",Globals.inactive)
+	if parent_pos.y + position.y == Globals.MAP_HEIGHT:
+		print("Hight condition: ", parent_pos.y + position.y)
 	if Globals.inactive.has(down_pos) or parent_pos.y + position.y == Globals.MAP_HEIGHT:
 		inactivate_it()
 		return false
@@ -72,7 +86,7 @@ func check_full_line():
 		shift_blocks(blocks_to_shift)
 
 func destroy_line(positions_to_erase):
-	Globals.add_points()
+	Globals.add_points(100)
 	var line_vals = positions_to_erase
 	for i in range(line_vals.size()-1,-1,-1):
 		Globals.inactive.remove(line_vals[i])

@@ -5,6 +5,8 @@ onready var shape2 = preload("res://shapes/Shape2.tscn")
 onready var shape3 = preload("res://shapes/Shape3.tscn")
 onready var shape4 = preload("res://shapes/Shape4.tscn")
 onready var shape5 = preload("res://shapes/Shape5.tscn")
+
+onready var next_shape_panel = $NextShapePanel
 var shapes = []
 var shape
 var active_block=false
@@ -19,6 +21,7 @@ var can_control = false
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
 	shapes = [ shape1, shape2, shape3, shape4, shape5 ]
+	next_shape_panel.set_shapes(shapes)
 	rnd.randomize()
 
 func _on_Timer_timeout():
@@ -28,7 +31,7 @@ func _on_Timer_timeout():
 		next_num = rnd.randi() % shapes.size()
 		rot = rnd.randi() % 4 if rot == -1 else next_rot
 		next_rot = rnd.randi() % 4
-		#$NextShapePanel/VBoxContainer/Control/Sprite.frame=next_num
+		next_shape_panel.set_shape(next_num, next_rot)
 		shape = shapes[num].instance()
 		shape.rotate_position = rot
 		$ShapesArea.add_child(shape)
@@ -53,14 +56,14 @@ func move_down():
 		$Timer.start()
 
 func _input(_event):
-	if not can_control:
-		return
 	if shape:
+		if Input.is_action_just_pressed("ui_down"):
+			move_down()
+		if not can_control:
+			return
 		if Input.is_action_just_pressed("ui_right"):
 			move_right()
 		if Input.is_action_just_pressed("ui_left"):
 			move_left()
-		if Input.is_action_just_pressed("ui_down"):
-			move_down()
 		if Input.is_action_just_pressed("ui_up"):
 			shape.rotate_it()

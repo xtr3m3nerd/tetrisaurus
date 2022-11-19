@@ -44,8 +44,11 @@ func _process(_delta):
 	
 	var mouse_pos = get_global_mouse_position() 
 	var screen_space = global_transform.origin
-	if facing_right != (mouse_pos.x > screen_space.x):
-		facing_right = mouse_pos.x > screen_space.x
+#	if facing_right != (mouse_pos.x > screen_space.x):
+#		facing_right = mouse_pos.x > screen_space.x
+#		change_direction()
+	if facing_right != move_right:
+		facing_right = move_right
 		change_direction()
 
 func change_direction():
@@ -85,6 +88,7 @@ func play_anim(anim_name, repeat = false, backwards = false):
 	cur_anim = anim_name
 
 func hurt():
+	print("kill")
 	kill()
 	Globals.restart_game()
 	
