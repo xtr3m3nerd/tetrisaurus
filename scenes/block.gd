@@ -4,7 +4,9 @@ var is_active=false
 
 func _ready():
 	is_active=true
-	Globals.connect("inact_shape", self, "inactivate_it")
+	var err = Globals.connect("inact_shape", self, "inactivate_it")
+	if err:
+		print("Failed to connect to inact_shape: ", err)
 
 func inactivate_it():
 	if is_active:
@@ -84,3 +86,8 @@ func shift_blocks(blocks):
 		
 func destroy_block():
 	queue_free()
+
+
+func _on_DamageArea_body_entered(body):
+	if body.has_method("hurt"):
+		body.hurt()

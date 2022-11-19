@@ -69,6 +69,10 @@ SceneManager="*res://scripts/SceneManager.gd"
 MusicManager="*res://scripts/MusicManager.tscn"
 UiSoundManager="*res://scripts/UISoundManager.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/width=2560

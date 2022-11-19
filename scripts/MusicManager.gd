@@ -4,23 +4,17 @@ onready var track1: AudioStreamPlayer = $Track1
 onready var track2: AudioStreamPlayer = $Track2
 
 # TODO - replace this with the starting music
-var menu_music = load("res://assets/sounds/music/hippotato_game_menu_final.wav")
-var story_music = load("res://assets/sounds/music/hippotato_game_intro_final.wav")
-var lab_music = load("res://assets/sounds/music/hippotato_game_menu_final.wav")
-var battle_music = load("res://assets/sounds/music/hippotato_game_battle_theme_final.wav")
+var menu_music = load("res://assets/sounds/music/tetrisaurus_menu_music.wav")
+var game_music = load("res://assets/sounds/music/tetrisaurus_game_music.wav")
 
-enum MUSIC { MENU, STORY, LAB, BATTLE }
+enum MUSIC { MENU, GAME }
 
 func get_song_from_enum(music):
 	match(music):
 		MUSIC.MENU:
 			return menu_music
-		MUSIC.STORY:
-			return story_music
-		MUSIC.LAB:
-			return lab_music
-		MUSIC.BATTLE:
-			return battle_music
+		MUSIC.GAME:
+			return game_music
 	print("Error finding song: ", music)
 	return null
 

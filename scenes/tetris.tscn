@@ -35,6 +35,9 @@ position = Vector2( 960, 0 )
 texture = ExtResource( 1 )
 centered = false
 
+[node name="Player" parent="ShapesArea" instance=ExtResource( 6 )]
+position = Vector2( 320, 1344 )
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
@@ -66,8 +69,5 @@ position = Vector2( 1664, 720 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 shape = SubResource( 4 )
-
-[node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1280, 1344 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

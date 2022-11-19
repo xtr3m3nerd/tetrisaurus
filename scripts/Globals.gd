@@ -6,6 +6,7 @@ signal add_points
 var inactive=[]
 var inactive_blocks=[]
 var points = 0
+var start_speed = 0.1
 var speed = 0.1
 const BLOCK_SIZE = 64
 const MAP_WIDTH = BLOCK_SIZE * 10
@@ -21,9 +22,11 @@ func add_points():
 	emit_signal("add_points")
 
 func restart_game():
-	speed=1
+	speed=start_speed
 	points=0
 	inactive.clear()
 	inactive_blocks.clear()
-	get_tree().reload_current_scene()
+	var err = get_tree().reload_current_scene()
+	if err:
+		print("Failed to restart scene: ", err)
 	

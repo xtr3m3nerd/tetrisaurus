@@ -68,8 +68,8 @@ func _physics_process(delta):
 			collision.collider.apply_central_impulse(-collision.normal * inertia)
 	emit_signal("movement_info", velocity, grounded)
 
-func knockback( dir: Vector2, inertia: int):
-	velocity = dir.normalized() * inertia
+func knockback( dir: Vector2, knockback_inertia: int):
+	velocity = dir.normalized() * knockback_inertia
 	
 func freeze(_apply_forces = false):
 	frozen = true

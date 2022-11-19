@@ -7,6 +7,22 @@ var is_fixed=false
 var rotation_matrix=[]
 var create_position: Vector2 = Vector2.ZERO
 
+func fix_x_position():
+	var min_x = 10000
+	var max_x = -10000
+	for child in get_children():
+		if child.position.x < min_x:
+			min_x = child.position.x
+		if child.position.x > max_x:
+			max_x = child.position.x
+	
+	var leftmost_pos = position.x + min_x
+	if leftmost_pos < 0:
+		position.x = -min_x
+	var rightmost_pos = position.x + max_x
+	if rightmost_pos > Globals.MAP_WIDTH - Globals.BLOCK_SIZE:
+		position.x = Globals.MAP_WIDTH - Globals.BLOCK_SIZE - max_x
+
 func draw_shape():
 	var ind=0
 	for child in get_children():
@@ -33,7 +49,9 @@ func rotate_shape():
 
 func inactivate_it():
 	if position == create_position:
-		get_tree().reload_current_scene()
+		var err = get_tree().reload_current_scene()
+		if err:
+			print("Failed to restart scene: ", err)
 	for child in get_children():
 		child.inactivate_it()
 

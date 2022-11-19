@@ -9,5 +9,4 @@ func _ready():
 		[Vector2(0,-Globals.BLOCK_SIZE*2), Vector2(0,-Globals.BLOCK_SIZE), Vector2(0,0), Vector2(0,Globals.BLOCK_SIZE)],
 	]
 	draw_shape()
-	rotate_position=1
 
