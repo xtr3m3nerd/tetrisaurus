@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var shape_spawn = $VBoxContainer/Shape/Spawn
+onready var shape_spawn = $Control/VBoxContainer/Shape/Spawn
 var shape: Shape0 = null
 var shapes = []
 

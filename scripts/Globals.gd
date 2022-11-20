@@ -32,7 +32,7 @@ func add_points(amnt):
 	if points > high_score:
 		set_high_score(points)
 	if points < max_speed_points:
-		speed = min_speed + (max_speed - min_speed) * (points / max_speed_points)
+		speed = min_speed + (max_speed - min_speed) * (float(points) / float(max_speed_points))
 	else:
 		speed = max_speed
 #	if points%100==0 and speed>0.1:
