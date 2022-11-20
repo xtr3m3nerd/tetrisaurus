@@ -102,3 +102,12 @@ func _input(_event):
 			move_left()
 		if Input.is_action_just_pressed("ui_up"):
 			shape.rotate_it()
+
+
+func _on_RestartButton_pressed():
+	Globals.restart_game()
+
+
+func _on_ReturnToMenuButton_pressed():
+	Globals.restart_game()
+	SceneManager.set_current_scene("res://menus/MainMenu.tscn")
