@@ -1,17 +1,34 @@
 extends Node2D
+class_name block
 
 onready var sprite: AnimatedSprite = $Sprite
 var is_active=false
 var is_display=false
+
+enum TYPE { ROCK, LAVA, SAND }
+var type = TYPE.ROCK
+
+
+var anim_type = {
+	TYPE.ROCK: "default",
+	TYPE.LAVA: "lava",
+	TYPE.SAND: "sand",
+}
 
 func _ready():
 	is_active=true
 	var err = Globals.connect("inact_shape", self, "inactivate_it")
 	if err:
 		print("Failed to connect to inact_shape: ", err)
-	sprite.frame = randi() % sprite.frames.get_frame_count("default")
+
+func set_type(_type):
+	type = _type
+	var cur_anim_type = anim_type.get(type)
+	sprite.animation = cur_anim_type
+	sprite.frame = randi() % sprite.frames.get_frame_count(cur_anim_type)
 	sprite.rotation_degrees = randi() % 4 * 90
-	
+	if type == TYPE.LAVA:
+		$LavaDamageArea.monitoring = true
 
 func inactivate_it():
 	if is_display:
@@ -21,7 +38,6 @@ func inactivate_it():
 		get_parent().is_fixed=true
 		is_active=false
 		get_tree().root.get_node("Tetris").active_block=false
-		print("Inactivate: ", get_parent().position+position)
 		Globals.inactive.append(get_parent().position+position)
 		Globals.inactive_blocks.append(self)
 		Globals.inactivate_shape()
@@ -43,12 +59,6 @@ func is_off_screen(vec) -> bool:
 func can_move_down() -> bool:
 	var parent_pos = get_parent().position
 	var down_pos = parent_pos + position + Vector2(0,Globals.BLOCK_SIZE)
-	#if parent_pos.x + position.x == 0 or Globals.inactive.has(down_pos) or parent_pos.y + position.y == Globals.MAP_HEIGHT:
-	if Globals.inactive.has(down_pos):
-		print("down_pos: ", down_pos)
-		print("Globals.inactive: ",Globals.inactive)
-	if parent_pos.y + position.y == Globals.MAP_HEIGHT:
-		print("Hight condition: ", parent_pos.y + position.y)
 	if Globals.inactive.has(down_pos) or parent_pos.y + position.y == Globals.MAP_HEIGHT:
 		inactivate_it()
 		return false
@@ -103,5 +113,10 @@ func destroy_block():
 
 
 func _on_DamageArea_body_entered(body):
+	if body.has_method("hurt"):
+		body.hurt()
+
+
+func _on_LavaDamageArea_body_entered(body):
 	if body.has_method("hurt"):
 		body.hurt()

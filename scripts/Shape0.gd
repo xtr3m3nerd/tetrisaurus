@@ -7,6 +7,8 @@ var is_fixed=false
 var rotation_matrix=[]
 var create_position: Vector2 = Vector2.ZERO
 
+var types = []
+
 func fix_x_position():
 	var min_x = 10000
 	var max_x = -10000
@@ -24,10 +26,12 @@ func fix_x_position():
 		position.x = Globals.MAP_WIDTH - Globals.BLOCK_SIZE - max_x
 
 func draw_shape():
+	if types.size() != get_children().size():
+		print(types.size(), " : ", get_children().size())
 	var ind=0
 	for child in get_children():
 		child.position=rotation_matrix[rotate_position][ind]
-		print("Create child ", ind, " at ", child.position)
+		child.set_type(types[ind])
 		ind+=1
 
 func rotate_it():

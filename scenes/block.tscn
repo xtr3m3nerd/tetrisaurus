@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/block.gd" type="Script" id=1]
 [ext_resource path="res://assets/volcanoblocks.png" type="Texture" id=2]
+[ext_resource path="res://assets/sand.png" type="Texture" id=3]
+[ext_resource path="res://assets/lava.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -29,6 +31,16 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "lava",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "sand",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -36,6 +48,9 @@ extents = Vector2( 32, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 24 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 33, 33 )
 
 [node name="Block" type="Node2D"]
 script = ExtResource( 1 )
@@ -58,4 +73,14 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource( 2 )
 
+[node name="LavaDamageArea" type="Area2D" parent="."]
+position = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LavaDamageArea"]
+shape = SubResource( 8 )
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="body_entered" from="LavaDamageArea" to="." method="_on_LavaDamageArea_body_entered"]

@@ -43,6 +43,11 @@ _global_script_classes=[ {
 "class": "Shape5",
 "language": "GDScript",
 "path": "res://shapes/Shape5.gd"
+}, {
+"base": "Node2D",
+"class": "block",
+"language": "GDScript",
+"path": "res://scenes/block.gd"
 } ]
 _global_script_class_icons={
 "SceneButton": "",
@@ -51,7 +56,8 @@ _global_script_class_icons={
 "Shape2": "",
 "Shape3": "",
 "Shape4": "",
-"Shape5": ""
+"Shape5": "",
+"block": ""
 }
 
 [application]
