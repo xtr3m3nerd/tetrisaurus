@@ -7,4 +7,5 @@ func _ready():
 		print("Failed to restart scene: ", err)
 
 func add_points():
-	$RichTextLabel.bbcode_text = str(Globals.points).pad_zeros(6)
+	$VBoxContainer/Points.text = str(Globals.points).pad_zeros(6)
+	$VBoxContainer/HighScore.text = str(Globals.high_score).pad_zeros(6)

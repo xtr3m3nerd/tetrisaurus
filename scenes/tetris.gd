@@ -50,18 +50,18 @@ func _on_Timer_timeout():
 		shape.rotate_position = rot
 		$ShapesArea.add_child(shape)
 		var player_x = int(player.position.x) / Globals.BLOCK_SIZE * Globals.BLOCK_SIZE
+		if player.dead:
+			player_x = (randi() % (Globals.MAP_WIDTH/Globals.BLOCK_SIZE)) * Globals.BLOCK_SIZE
 		shape.position = Vector2(player_x, 0)
 		shape.fix_x_position()
 		active_block = true
 	else:
 		move_down()
 
-func gen_block_types(num):
-	print(num)
+func gen_block_types(blocks):
 	var results = []
-	for n in num:
+	for n in blocks:
 		results.append(gen_block_type())
-	print(results)
 	return results
 
 func gen_block_type():

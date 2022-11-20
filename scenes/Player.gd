@@ -1,8 +1,14 @@
 extends KinematicBody2D
 
+signal hurt
+signal dead
+
 onready var graphics = $Graphics
 onready var character_mover = $CharacterMover
 onready var anim_player = $AnimationPlayer
+onready var effect_player = $EffectPlayer
+
+var death_screen = preload("res://scenes/DeathScreen.tscn")
 
 var dead = false
 
@@ -10,6 +16,8 @@ var facing_right = true
 var move_right = true
 var grounded = true
 var cur_anim = ""
+var max_health = 3
+var cur_health = 3
 
 var ready = false 
 func _ready():
@@ -18,6 +26,7 @@ func _ready():
 	if err != 0:
 		print("ERROR: unable to connect to movement_info: ", err)
 	
+	cur_health = max_health
 	ready = true
 
 func _process(_delta):
@@ -87,15 +96,30 @@ func play_anim(anim_name, repeat = false, backwards = false):
 		#anim_player.play(anim_name)
 	cur_anim = anim_name
 
-func hurt():
-	print("kill")
-	kill()
-	Globals.restart_game()
+func hurt(damage):
+	if dead:
+		return
+	cur_health -= damage
+	effect_player.play("hurt")
+	emit_signal("hurt")
+	if cur_health <= 0:
+		kill()
+		#Globals.restart_game()
 	
 func kill():
+	print("kill")
 	dead = true
 	freeze()
+	emit_signal("dead")
+	effect_player.play("dead")
+	Globals.save_high_score()
+	spawn_death_screen()
 	#anim_player.play("die")
+
+func spawn_death_screen():
+	var death_screen_inst = death_screen.instance()
+	get_tree().get_root().add_child(death_screen_inst)
+	
 
 func freeze():
 	character_mover.freeze(true)

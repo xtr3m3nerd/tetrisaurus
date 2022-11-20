@@ -84,17 +84,15 @@ func move_down():
 	if not create_position: 
 		create_position = position
 	if not is_fixed:
-		var c = 0
 		for child in get_children():
 			if not child.can_move_down():
 				print("create position: %s e position: %s"%[create_position, position])
 				if create_position==position:
-					print(c)
-					print_children_pos()
-					Globals.restart_game()
+					var player = get_tree().get_nodes_in_group("player")[0]
+					player.hurt(100)
+					queue_free()
 				is_fixed=true
 				return
-			c += 1
 		position.y += Globals.BLOCK_SIZE
 
 func print_children_pos():

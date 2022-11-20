@@ -100,8 +100,9 @@ func destroy_line(positions_to_erase):
 	var line_vals = positions_to_erase
 	for i in range(line_vals.size()-1,-1,-1):
 		Globals.inactive.remove(line_vals[i])
-		Globals.inactive_blocks[line_vals[i]].destroy_block()
-		Globals.inactive_blocks.remove(line_vals[i])
+		if Globals.inactive_blocks[line_vals[i]] != null:
+			Globals.inactive_blocks[line_vals[i]].destroy_block()
+			Globals.inactive_blocks.remove(line_vals[i])
 
 func shift_blocks(blocks):
 	for i in blocks:
@@ -114,9 +115,9 @@ func destroy_block():
 
 func _on_DamageArea_body_entered(body):
 	if body.has_method("hurt"):
-		body.hurt()
+		body.hurt(100)
 
 
 func _on_LavaDamageArea_body_entered(body):
 	if body.has_method("hurt"):
-		body.hurt()
+		body.hurt(1)
