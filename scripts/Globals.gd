@@ -2,6 +2,7 @@ extends Node
 
 signal inact_shape
 signal add_points
+signal move_down_action
 
 var inactive=[]
 var inactive_blocks=[]
@@ -68,3 +69,6 @@ func save_high_score():
 func set_high_score(score):
 	high_score = score
 	high_score_file.set_value("User", "HighScore", score)
+
+func emit_move_down():
+	emit_signal("move_down_action")

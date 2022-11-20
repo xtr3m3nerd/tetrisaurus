@@ -4,7 +4,7 @@ onready var shape1 = preload("res://shapes/Shape1.tscn")
 onready var shape2 = preload("res://shapes/Shape2.tscn")
 onready var shape3 = preload("res://shapes/Shape3.tscn")
 onready var shape4 = preload("res://shapes/Shape4.tscn")
-onready var shape5:PackedScene = preload("res://shapes/Shape5.tscn")
+onready var shape5 = preload("res://shapes/Shape5.tscn")
 
 onready var next_shape_panel = $NextShapePanel
 var shapes = []
@@ -87,6 +87,7 @@ func move_right():
 
 func move_down():
 	if active_block:
+		Globals.emit_move_down()
 		shape.move_down()
 		$Timer.start()
 

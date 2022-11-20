@@ -20,6 +20,10 @@ func _ready():
 	var err = Globals.connect("inact_shape", self, "inactivate_it")
 	if err:
 		print("Failed to connect to inact_shape: ", err)
+	
+	err = Globals.connect("move_down_action", self, "move_down")
+	if err:
+		print("Failed to connect to move_down_action: ", err)
 
 func set_type(_type):
 	type = _type
@@ -35,12 +39,14 @@ func inactivate_it():
 		return
 	if is_active:
 		Globals.add_points(10)
+		if not get_parent().is_fixed:
+			get_tree().root.get_node("Tetris").active_block=false
 		get_parent().is_fixed=true
 		is_active=false
-		get_tree().root.get_node("Tetris").active_block=false
 		Globals.inactive.append(get_parent().position+position)
 		Globals.inactive_blocks.append(self)
-		Globals.inactivate_shape()
+		if get_tree().root.get_node("Tetris").shape == get_parent():
+			Globals.inactivate_shape()
 		check_full_line()
 
 func can_rotate(val) -> bool:
@@ -100,7 +106,7 @@ func destroy_line(positions_to_erase):
 	var line_vals = positions_to_erase
 	for i in range(line_vals.size()-1,-1,-1):
 		Globals.inactive.remove(line_vals[i])
-		if Globals.inactive_blocks[line_vals[i]] != null:
+		if is_instance_valid(Globals.inactive_blocks[line_vals[i]]):
 			Globals.inactive_blocks[line_vals[i]].destroy_block()
 			Globals.inactive_blocks.remove(line_vals[i])
 
@@ -108,7 +114,31 @@ func shift_blocks(blocks):
 	for i in blocks:
 		Globals.inactive[i].y += Globals.BLOCK_SIZE
 		Globals.inactive_blocks[i].position.y += Globals.BLOCK_SIZE
-		
+
+func move_down():
+	if is_display:
+		return
+	# Dont move if moving with parent
+	if not get_parent().is_fixed:
+		return
+	if type != TYPE.SAND:
+		return 
+	if can_move_down():
+		if not is_active:
+			reactivate()
+		position.y += Globals.BLOCK_SIZE
+	else:
+		inactivate_it()
+
+func reactivate():
+	if not is_active:
+		is_active=true
+		var index = Globals.inactive.find(get_parent().position+position)
+		if index != -1:
+			Globals.inactive.remove(index)
+			Globals.inactive_blocks.remove(index)
+			
+	
 func destroy_block():
 	queue_free()
 

@@ -13,38 +13,38 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="PointsLabel" type="Label" parent="VBoxContainer"]
+[node name="HighScoreLabel" type="Label" parent="VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 90.0
-rect_min_size = Vector2( 600, 90 )
-theme = SubResource( 3 )
-text = "Current Score:"
-align = 1
-
-[node name="Points" type="Label" parent="VBoxContainer"]
-margin_top = 94.0
-margin_right = 600.0
-margin_bottom = 274.0
-rect_min_size = Vector2( 600, 180 )
-theme = SubResource( 3 )
-text = "000000
-"
-align = 1
-
-[node name="HighScoreLabel" type="Label" parent="VBoxContainer"]
-margin_top = 278.0
-margin_right = 600.0
-margin_bottom = 368.0
 rect_min_size = Vector2( 600, 90 )
 theme = SubResource( 3 )
 text = "Highscore:"
 align = 1
 
 [node name="HighScore" type="Label" parent="VBoxContainer"]
+margin_top = 94.0
+margin_right = 600.0
+margin_bottom = 274.0
+rect_min_size = Vector2( 600, 180 )
+theme = SubResource( 3 )
+text = "000000"
+align = 1
+
+[node name="PointsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 278.0
+margin_right = 600.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 600, 90 )
+theme = SubResource( 3 )
+text = "Current Score:"
+align = 1
+
+[node name="Points" type="Label" parent="VBoxContainer"]
 margin_top = 372.0
 margin_right = 600.0
 margin_bottom = 552.0
 rect_min_size = Vector2( 600, 180 )
 theme = SubResource( 3 )
-text = "000000"
+text = "000000
+"
 align = 1

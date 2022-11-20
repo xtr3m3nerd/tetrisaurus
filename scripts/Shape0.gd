@@ -70,7 +70,6 @@ func move_left():
 			if not child.can_move_left():
 				return
 		position.x -= Globals.BLOCK_SIZE
-		print(position)
 
 func move_right():
 	if not is_fixed:
@@ -78,7 +77,6 @@ func move_right():
 			if not child.can_move_right():
 				return
 		position.x += Globals.BLOCK_SIZE
-		print(position)
 
 func move_down():
 	if not create_position: 
