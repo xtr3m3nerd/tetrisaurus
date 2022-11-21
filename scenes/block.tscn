@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/block.gd" type="Script" id=1]
 [ext_resource path="res://assets/volcanoblocks.png" type="Texture" id=2]
 [ext_resource path="res://assets/lava_glow.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/sfx/Hit_hurt 35.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -120,6 +121,11 @@ texture = ExtResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "lava_glow"
 anims/lava_glow = SubResource( 11 )
+
+[node name="Plop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -11.362
+bus = "Sfx"
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="body_entered" from="LavaDamageArea" to="." method="_on_LavaDamageArea_body_entered"]

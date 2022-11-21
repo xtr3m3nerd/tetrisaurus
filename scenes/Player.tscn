@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/CharacterMover.gd" type="Script" id=2]
 [ext_resource path="res://assets/dino.png" type="Texture" id=3]
 [ext_resource path="res://assets/dinojam dino.png" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/sfx/Jump 22.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/sfx/Explosion 26.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/sfx/Explosion 13.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/DinoBody.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 24.0
@@ -76,10 +80,15 @@ visible = false
 texture = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="Graphics"]
+visible = false
 scale = Vector2( -1, 1 )
 texture = ExtResource( 4 )
 hframes = 9
 frame = 2
+
+[node name="DinoBody" parent="Graphics" instance=ExtResource( 8 )]
+position = Vector2( 2, 33 )
+scale = Vector2( -1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -32 )
@@ -92,3 +101,15 @@ autoplay = "RESET"
 anims/RESET = SubResource( 4 )
 anims/dead = SubResource( 2 )
 anims/hurt = SubResource( 3 )
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+bus = "Sfx"
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+bus = "Sfx"
+
+[node name="Dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+bus = "Sfx"

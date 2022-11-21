@@ -117,9 +117,14 @@ func _input(_event):
 
 
 func _on_RestartButton_pressed():
+	UiSoundManager.play_button()
 	Globals.restart_game()
 
 
 func _on_ReturnToMenuButton_pressed():
+	UiSoundManager.play_button()
 	Globals.restart_game()
 	SceneManager.set_current_scene("res://menus/MainMenu.tscn")
+
+func play_clear_noise():
+	$ClearRow.play()

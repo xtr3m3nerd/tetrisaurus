@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://menus/Controls/SceneButton.gd" type="Script" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://menus/DifficultyButtonGroup.tres" type="ButtonGroup" id=4]
 [ext_resource path="res://assets/checked_box.png" type="Texture" id=5]
 [ext_resource path="res://assets/unchecked_box.png" type="Texture" id=6]
+[ext_resource path="res://menus/OSLabel.gd" type="Script" id=7]
+[ext_resource path="res://assets/fonts/UIFont.tres" type="DynamicFont" id=8]
 
 [sub_resource type="Theme" id=1]
+default_font = ExtResource( 8 )
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://assets/fonts/Roboto-Bold.ttf"
@@ -68,6 +71,12 @@ CheckBox/colors/font_color_pressed = Color( 1, 0.537255, 0, 1 )
 CheckBox/icons/radio_checked = ExtResource( 5 )
 CheckBox/icons/radio_unchecked = ExtResource( 6 )
 Label/colors/font_color = Color( 1, 0.537255, 0, 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 12 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -171,10 +180,21 @@ group = ExtResource( 4 )
 text = "Hard"
 align = 1
 
+[node name="OSLabel" type="Label" parent="."]
+margin_left = 44.0
+margin_top = 1379.0
+margin_right = 370.0
+margin_bottom = 1455.0
+custom_fonts/font = SubResource( 15 )
+text = " OS_VALUE"
+script = ExtResource( 7 )
+
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/OptionsButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="DifficultyBox/EasyCheckbox" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="DifficultyBox/EasyCheckbox" to="." method="_on_EasyCheckbox_pressed"]
+[connection signal="pressed" from="DifficultyBox/HardCheckbox" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="DifficultyBox/HardCheckbox" to="." method="_on_HardCheckbox_pressed"]

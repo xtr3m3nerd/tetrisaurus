@@ -5,7 +5,7 @@ signal dead
 
 onready var graphics = $Graphics
 onready var character_mover = $CharacterMover
-onready var anim_player = $AnimationPlayer
+onready var anim_player = $Graphics/DinoBody/AnimationPlayer
 onready var effect_player = $EffectPlayer
 
 var death_screen = preload("res://scenes/DeathScreen.tscn")
@@ -84,16 +84,14 @@ func set_walk_anim():
 		play_anim("walk_loop", true, true)
 
 func play_anim(anim_name, repeat = false, backwards = false):
-	#if anim_name != anim_player.current_animation:
-	#	print(anim_name, " : ", anim_player.current_animation)
+	if anim_name != anim_player.current_animation:
+		print(anim_name, " : ", anim_player.current_animation)
 	if !repeat and cur_anim == anim_name:
 		return
 	if backwards:
-		pass
-		#anim_player.play_backwards(anim_name)
+		anim_player.play_backwards(anim_name)
 	else:
-		pass
-		#anim_player.play(anim_name)
+		anim_player.play(anim_name)
 	cur_anim = anim_name
 
 func hurt(damage):
@@ -104,7 +102,8 @@ func hurt(damage):
 	emit_signal("hurt")
 	if cur_health <= 0:
 		kill()
-		#Globals.restart_game()
+	else:
+		play_hurt()
 	
 func kill():
 	print("kill")
@@ -114,7 +113,8 @@ func kill():
 	effect_player.play("dead")
 	Globals.save_high_score()
 	spawn_death_screen()
-	#anim_player.play("die")
+	play_dead()
+	anim_player.play("die")
 
 func spawn_death_screen():
 	var death_screen_inst = death_screen.instance()
@@ -126,3 +126,12 @@ func freeze():
 
 func unfreeze():
 	character_mover.unfreeze()
+
+func play_jump():
+	$Jump.play()
+
+func play_hurt():
+	$Hurt.play()
+	
+func play_dead():
+	$Dead.play()

@@ -46,6 +46,7 @@ func inactivate_it():
 			get_tree().root.get_node("Tetris").active_block=false
 		get_parent().is_fixed=true
 		is_active=false
+		play_plop()
 		Globals.inactive.append(get_parent().position+position)
 		Globals.inactive_blocks.append(self)
 		if get_tree().root.get_node("Tetris").shape == get_parent():
@@ -107,6 +108,7 @@ func check_full_line():
 func destroy_line(positions_to_erase):
 	Globals.add_points(100)
 	var line_vals = positions_to_erase
+	get_tree().root.get_node("Tetris").play_clear_noise()
 	for i in range(line_vals.size()-1,-1,-1):
 		Globals.inactive.remove(line_vals[i])
 		if is_instance_valid(Globals.inactive_blocks[line_vals[i]]):
@@ -155,3 +157,6 @@ func _on_DamageArea_body_entered(body):
 func _on_LavaDamageArea_body_entered(body):
 	if body.has_method("hurt"):
 		body.hurt(1)
+
+func play_plop():
+	$Plop.play()

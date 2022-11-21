@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/volcano background.png" type="Texture" id=1]
 [ext_resource path="res://assets/main_background.jpg" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/fonts/UIFont.tres" type="DynamicFont" id=10]
 [ext_resource path="res://assets/controls.png" type="Texture" id=11]
 [ext_resource path="res://assets/instructions.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/sfx/Pickup_coin 27.wav" type="AudioStream" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 360, 48 )
@@ -157,6 +158,10 @@ margin_right = 476.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 250, 100 )
 text = "Return To Menu"
+
+[node name="ClearRow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+bus = "Sfx"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
