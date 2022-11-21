@@ -181,6 +181,7 @@ text = "Hard"
 align = 1
 
 [node name="OSLabel" type="Label" parent="."]
+visible = false
 margin_left = 44.0
 margin_top = 1379.0
 margin_right = 370.0

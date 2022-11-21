@@ -52,15 +52,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -720.0
-margin_top = -390.5
+margin_top = -490.0
 margin_right = 720.0
-margin_bottom = 390.5
-rect_min_size = Vector2( 500, 500 )
+margin_bottom = 490.0
+rect_min_size = Vector2( 500, 900 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 1440.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 1440, 720 )
+margin_bottom = 900.0
+rect_min_size = Vector2( 1440, 900 )
 
 [node name="Control" type="Control" parent="VBoxContainer/ScrollContainer"]
 
@@ -78,38 +78,70 @@ Assets created with Gimp, Krita, Stable Diffusion, Blender
 
 All assets were created by CranberryNinja and Mabyn for AI and Games Jam 2022 during the jam with the exception of the following:"
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
+[node name="Music2" type="Label" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
 margin_top = 4.0
 margin_right = 1440.0
-margin_bottom = 393.0
-text = "Game Designed and Produced by CranberryNinja, TehNinjaFlute, and tiffrs
+margin_bottom = 50.0
+text = "Game made for DinoJam2"
+
+[node name="LinkButton3" type="LinkButton" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
+margin_top = 54.0
+margin_right = 1440.0
+margin_bottom = 100.0
+focus_mode = 2
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+text = "https://itch.io/jam/dinojam2"
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
+margin_top = 104.0
+margin_right = 1440.0
+margin_bottom = 542.0
+text = "
+Designed and Produced by CranberryNinja, TehNinjaFlute, and tiffrs
 
   Tools Used:
-Game Made with Godot Engine
-Assets created with Gimp, Krita, Stable Diffusion, Blender, MuseScore, Audacity
+Game made with Godot Engine
+Assets created with Gimp, Krita, Stable Diffusion, Blender, MuseScore, Audacity, jfrx
 
-All assets were created by CranberryNinja, TehNinjaFlute, and tiffrs for DinoJam2 during the jam."
+All assets were created by CranberryNinja, TehNinjaFlute, and tiffrs for DinoJam2 during the jam, with the exception of the music."
 autowrap = true
 
 [node name="Label2" type="Label" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
-margin_top = 397.0
+margin_top = 546.0
 margin_right = 1440.0
-margin_bottom = 492.0
+margin_bottom = 641.0
 text = "
     Source Code:"
 
 [node name="LinkButton" type="LinkButton" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
-margin_top = 496.0
+margin_top = 645.0
 margin_right = 1440.0
-margin_bottom = 542.0
+margin_bottom = 691.0
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 text = "https://github.com/xtr3m3nerd/tetrisaurus"
 script = ExtResource( 2 )
 
-[node name="BackButton" type="Button" parent="VBoxContainer"]
-margin_top = 724.0
+[node name="Music" type="Label" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
+margin_top = 695.0
 margin_right = 1440.0
-margin_bottom = 800.0
+margin_bottom = 790.0
+text = "
+    Music by SketchyLogic (CC-BY 3.0):"
+
+[node name="LinkButton2" type="LinkButton" parent="VBoxContainer/ScrollContainer/Control/VBoxContainer"]
+margin_top = 794.0
+margin_right = 1440.0
+margin_bottom = 840.0
+focus_mode = 2
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+text = "https://opengameart.org/content/hungry-dino-9-chiptune-tracks-10-sfx"
+script = ExtResource( 2 )
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+margin_top = 904.0
+margin_right = 1440.0
+margin_bottom = 980.0
 text = "Back"
 
 [node name="CranberryNinjaIcon" type="TextureRect" parent="."]

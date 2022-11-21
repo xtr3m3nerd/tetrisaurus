@@ -3,7 +3,7 @@ extends Node
 var config: ConfigFile
 
 var volumes = {
-	"Master": 1.0,
+	"Master": 0.5,
 	"Music": 1.0,
 	"Sfx": 1.0,
 }

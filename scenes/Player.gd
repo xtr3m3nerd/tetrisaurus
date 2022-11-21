@@ -84,8 +84,8 @@ func set_walk_anim():
 		play_anim("walk_loop", true, true)
 
 func play_anim(anim_name, repeat = false, backwards = false):
-	if anim_name != anim_player.current_animation:
-		print(anim_name, " : ", anim_player.current_animation)
+#	if anim_name != anim_player.current_animation:
+#		print(anim_name, " : ", anim_player.current_animation)
 	if !repeat and cur_anim == anim_name:
 		return
 	if backwards:

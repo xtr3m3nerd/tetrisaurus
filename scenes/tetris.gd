@@ -45,6 +45,7 @@ func _ready():
 	#num_blocks = [ 4 ]
 	next_shape_panel.set_shapes(shapes)
 	rnd.randomize()
+	MusicManager.transition_music(MusicManager.MUSIC.GAME)
 
 func _on_Timer_timeout():
 	$Timer.wait_time=Globals.speed

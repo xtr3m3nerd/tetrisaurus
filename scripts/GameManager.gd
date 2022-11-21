@@ -13,7 +13,7 @@ func _process(_delta):
 		quit_game()
 
 func quit_game():
-	if OS.get_name() == "Web":
+	if OS.get_name() == "HTML5":
 		return
 	if is_quiting:
 		return

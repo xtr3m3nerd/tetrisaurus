@@ -4,8 +4,8 @@ onready var track1: AudioStreamPlayer = $Track1
 onready var track2: AudioStreamPlayer = $Track2
 
 # TODO - replace this with the starting music
-var menu_music = load("res://assets/sounds/music/tetrisaurus_menu_music.wav")
-var game_music = load("res://assets/sounds/music/tetrisaurus_game_music.wav")
+var menu_music = load("res://assets/sounds/music/Music/MainTheme.wav")
+var game_music = load("res://assets/sounds/music/Music/8BitMetal.wav")
 
 enum MUSIC { MENU, GAME }
 
