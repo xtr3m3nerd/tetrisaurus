@@ -55,10 +55,10 @@ func load_highscore():
 	high_score_file = ConfigFile.new()
 	var err = high_score_file.load("user://highscore.cfg")
 	if err == OK:
-		_load_highscore()
+		get_highscore()
 
-func _load_highscore():
-	high_score = high_score_file.get_value("User", "HighScore", high_score)
+func get_highscore():
+	high_score = high_score_file.get_value("User", "HighScore" + str(SettingsManager.difficulty), high_score)
 	set_high_score(high_score)
 
 func save_high_score():
@@ -68,7 +68,7 @@ func save_high_score():
 
 func set_high_score(score):
 	high_score = score
-	high_score_file.set_value("User", "HighScore", score)
+	high_score_file.set_value("User", "HighScore" + str(SettingsManager.difficulty), score)
 
 func emit_move_down():
 	emit_signal("move_down_action")

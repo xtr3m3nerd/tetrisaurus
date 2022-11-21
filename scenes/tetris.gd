@@ -5,6 +5,11 @@ onready var shape2 = preload("res://shapes/Shape2.tscn")
 onready var shape3 = preload("res://shapes/Shape3.tscn")
 onready var shape4 = preload("res://shapes/Shape4.tscn")
 onready var shape5 = preload("res://shapes/Shape5.tscn")
+onready var shape6 = preload("res://shapes/Shape6.tscn")
+onready var shape7 = preload("res://shapes/Shape7.tscn")
+onready var shape8 = preload("res://shapes/Shape8.tscn")
+onready var shape9 = preload("res://shapes/Shape9.tscn")
+onready var shape10 = preload("res://shapes/Shape10.tscn")
 
 onready var next_shape_panel = $NextShapePanel
 var shapes = []
@@ -30,8 +35,14 @@ var num_blocks = []
 
 func _ready():
 	player = get_tree().get_nodes_in_group("player")[0]
-	shapes = [ shape1, shape2, shape3, shape4, shape5 ]
-	num_blocks = [ 1, 2, 3, 4, 4]
+	if SettingsManager.difficulty == SettingsManager.DIFFICULTY.EASY:
+		shapes = [ shape1, shape2, shape3, shape4, shape5 ]
+		num_blocks = [ 1, 2, 3, 4, 4 ]
+	if SettingsManager.difficulty == SettingsManager.DIFFICULTY.HARD:
+		shapes = [ shape1, shape2, shape3, shape4, shape5, shape6, shape7, shape8, shape9, shape10 ]
+		num_blocks = [ 1, 2, 3, 4, 4, 4, 4, 4, 4, 4 ]
+	#shapes = [ shape10 ]
+	#num_blocks = [ 4 ]
 	next_shape_panel.set_shapes(shapes)
 	rnd.randomize()
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/block.gd" type="Script" id=1]
 [ext_resource path="res://assets/volcanoblocks.png" type="Texture" id=2]
+[ext_resource path="res://assets/lava_glow.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -60,6 +61,23 @@ extents = Vector2( 24, 24 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 32.5, 32.5 )
 
+[sub_resource type="Animation" id=11]
+resource_name = "lava_glow"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LavaGlow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.247059 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Block" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -70,6 +88,7 @@ frames = SubResource( 7 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 
@@ -79,6 +98,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="LavaDamageArea" type="Area2D" parent="."]
@@ -88,7 +108,18 @@ collision_mask = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaDamageArea"]
+visible = false
 shape = SubResource( 8 )
+
+[node name="LavaGlow" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.116933 )
+position = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "lava_glow"
+anims/lava_glow = SubResource( 11 )
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="body_entered" from="LavaDamageArea" to="." method="_on_LavaDamageArea_body_entered"]

@@ -16,6 +16,8 @@ var anim_type = {
 }
 
 func _ready():
+	if type != TYPE.LAVA:
+		$LavaGlow.hide()
 	is_active=true
 	var err = Globals.connect("inact_shape", self, "inactivate_it")
 	if err:
@@ -33,6 +35,7 @@ func set_type(_type):
 	sprite.rotation_degrees = randi() % 4 * 90
 	if type == TYPE.LAVA:
 		$LavaDamageArea.monitoring = true
+		$LavaGlow.show()
 
 func inactivate_it():
 	if is_display:
@@ -113,7 +116,8 @@ func destroy_line(positions_to_erase):
 func shift_blocks(blocks):
 	for i in blocks:
 		Globals.inactive[i].y += Globals.BLOCK_SIZE
-		Globals.inactive_blocks[i].position.y += Globals.BLOCK_SIZE
+		if is_instance_valid(Globals.inactive_blocks[i]):
+			Globals.inactive_blocks[i].position.y += Globals.BLOCK_SIZE
 
 func move_down():
 	if is_display:

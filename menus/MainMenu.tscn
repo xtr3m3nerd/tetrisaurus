@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://menus/Controls/SceneButton.gd" type="Script" id=2]
-[ext_resource path="res://assets/Tetrasaurus Rex Menu Screen.png" type="Texture" id=3]
+[ext_resource path="res://assets/menu_screen.jpg" type="Texture" id=3]
+[ext_resource path="res://menus/DifficultyButtonGroup.tres" type="ButtonGroup" id=4]
+[ext_resource path="res://assets/checked_box.png" type="Texture" id=5]
+[ext_resource path="res://assets/unchecked_box.png" type="Texture" id=6]
 
 [sub_resource type="Theme" id=1]
 
@@ -35,16 +38,36 @@ font_data = SubResource( 4 )
 [sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="Theme" id=11]
-Button/colors/font_color = Color( 0.454902, 0.898039, 0.364706, 1 )
-Button/colors/font_color_focus = Color( 0.168627, 1, 0, 1 )
-Button/colors/font_color_hover = Color( 0.321569, 0.819608, 0.219608, 1 )
-Button/colors/font_color_pressed = Color( 0.305882, 0.54902, 0.254902, 1 )
+Button/colors/font_color = Color( 1, 0.537255, 0, 1 )
+Button/colors/font_color_focus = Color( 1, 0.4, 0, 1 )
+Button/colors/font_color_hover = Color( 1, 0.654902, 0, 1 )
+Button/colors/font_color_pressed = Color( 1, 0.0705882, 0, 1 )
 Button/fonts/font = SubResource( 5 )
 Button/styles/disabled = SubResource( 6 )
 Button/styles/focus = SubResource( 7 )
 Button/styles/hover = SubResource( 8 )
 Button/styles/normal = SubResource( 9 )
 Button/styles/pressed = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://assets/fonts/Roboto-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+size = 64
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 12 )
+
+[sub_resource type="Theme" id=14]
+default_font = SubResource( 13 )
+CheckBox/colors/font_color = Color( 1, 0.537255, 0, 1 )
+CheckBox/colors/font_color_focus = Color( 1, 0.537255, 0, 1 )
+CheckBox/colors/font_color_hover = Color( 1, 0.537255, 0, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.537255, 0, 1 )
+CheckBox/colors/font_color_pressed = Color( 1, 0.537255, 0, 1 )
+CheckBox/icons/radio_checked = ExtResource( 5 )
+CheckBox/icons/radio_unchecked = ExtResource( 6 )
+Label/colors/font_color = Color( 1, 0.537255, 0, 1 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -67,7 +90,7 @@ margin_bottom = 300.0
 [node name="TitleText" type="Label" parent="Title"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_colors/font_color = Color( 0.454902, 0.898039, 0.364706, 1 )
+custom_colors/font_color = Color( 0.898039, 0.839216, 0.364706, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "TETRISAURUS"
 align = 1
@@ -78,10 +101,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -289.0
-margin_top = -290.0
-margin_right = 289.0
-margin_bottom = 290.0
+margin_left = -849.0
+margin_top = -42.0
+margin_right = -271.0
+margin_bottom = 538.0
 theme = SubResource( 11 )
 
 [node name="StartButton" type="Button" parent="Buttons"]
@@ -118,8 +141,40 @@ margin_bottom = 580.0
 focus_neighbour_bottom = NodePath("../StartButton")
 text = "Quit"
 
+[node name="DifficultyBox" type="VBoxContainer" parent="."]
+margin_left = 2101.0
+margin_top = 357.0
+margin_right = 2381.0
+margin_bottom = 609.0
+theme = SubResource( 14 )
+
+[node name="DifficultyLabel" type="Label" parent="DifficultyBox"]
+margin_right = 280.0
+margin_bottom = 76.0
+text = "Difficulty:"
+align = 1
+
+[node name="EasyCheckbox" type="CheckBox" parent="DifficultyBox"]
+margin_top = 80.0
+margin_right = 280.0
+margin_bottom = 164.0
+pressed = true
+group = ExtResource( 4 )
+text = "Easy"
+align = 1
+
+[node name="HardCheckbox" type="CheckBox" parent="DifficultyBox"]
+margin_top = 168.0
+margin_right = 280.0
+margin_bottom = 252.0
+group = ExtResource( 4 )
+text = "Hard"
+align = 1
+
 [connection signal="pressed" from="Buttons/StartButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/OptionsButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/CreditsButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="DifficultyBox/EasyCheckbox" to="." method="_on_EasyCheckbox_pressed"]
+[connection signal="pressed" from="DifficultyBox/HardCheckbox" to="." method="_on_HardCheckbox_pressed"]

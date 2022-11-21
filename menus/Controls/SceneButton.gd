@@ -19,6 +19,7 @@ func _on_pressed():
 		LOAD_TYPE.NONE:
 			return
 		LOAD_TYPE.SWAP:
+			SettingsManager.save_settings()
 			SceneManager.set_current_scene(scene_to_load)
 		LOAD_TYPE.ADD:
 			SceneManager.add_scene_to_current(scene_to_load)

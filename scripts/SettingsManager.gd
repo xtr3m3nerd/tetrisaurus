@@ -8,6 +8,9 @@ var volumes = {
 	"Sfx": 1.0,
 }
 
+enum DIFFICULTY { EASY, HARD }
+var difficulty = DIFFICULTY.EASY
+
 var is_fullscreen: bool = false
 
 func _ready():
@@ -18,6 +21,7 @@ func _ready():
 	if err == OK:
 		_load_volumes()
 		_load_screen_settings()
+		_load_difficulty()
 
 func save_settings():
 	var err = config.save("user://settings.cfg")
@@ -33,6 +37,9 @@ func _load_volumes():
 func _load_screen_settings():
 	is_fullscreen = config.get_value("Settings", "FullScreen", is_fullscreen)
 	OS.window_fullscreen = is_fullscreen and OS.get_name() != "Web"
+	
+func _load_difficulty():
+	difficulty = config.get_value("Settings", "Difficulty", difficulty)
 
 func set_bus_volume(bus_name: String, value: float):
 	volumes[bus_name] = value
@@ -44,3 +51,8 @@ func set_fullscreen(_is_fullscreen):
 	is_fullscreen = _is_fullscreen
 	config.set_value("Settings", "FullScreen", is_fullscreen)
 	OS.window_fullscreen = is_fullscreen and OS.get_name() != "Web"
+
+func set_difficulty(_difficulty):
+	difficulty = _difficulty
+	config.set_value("Settings", "Difficulty", difficulty)
+	Globals.get_highscore()

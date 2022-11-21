@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://shapes/Shape1.gd"
 }, {
 "base": "Shape0",
+"class": "Shape10",
+"language": "GDScript",
+"path": "res://shapes/Shape10.gd"
+}, {
+"base": "Shape0",
 "class": "Shape2",
 "language": "GDScript",
 "path": "res://shapes/Shape2.gd"
@@ -44,6 +49,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shapes/Shape5.gd"
 }, {
+"base": "Shape0",
+"class": "Shape6",
+"language": "GDScript",
+"path": "res://shapes/Shape6.gd"
+}, {
+"base": "Shape0",
+"class": "Shape7",
+"language": "GDScript",
+"path": "res://shapes/Shape7.gd"
+}, {
+"base": "Shape0",
+"class": "Shape8",
+"language": "GDScript",
+"path": "res://shapes/Shape8.gd"
+}, {
+"base": "Shape0",
+"class": "Shape9",
+"language": "GDScript",
+"path": "res://shapes/Shape9.gd"
+}, {
 "base": "Node2D",
 "class": "block",
 "language": "GDScript",
@@ -53,10 +78,15 @@ _global_script_class_icons={
 "SceneButton": "",
 "Shape0": "",
 "Shape1": "",
+"Shape10": "",
 "Shape2": "",
 "Shape3": "",
 "Shape4": "",
 "Shape5": "",
+"Shape6": "",
+"Shape7": "",
+"Shape8": "",
+"Shape9": "",
 "block": ""
 }
 
